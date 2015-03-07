@@ -54,11 +54,14 @@ void calculatePhysics()
         in_jump = false;
         delta_time = 0.0f;
     }
-  
-  print("velocity = ");
-  print(vertical_velocity);
-  print("\t time = ");
-  println(delta_time);
+    
+  // print out vertical velocity and time delta
+  #if 0
+    print("velocity = ");
+    print(vertical_velocity);
+    print("\t time = ");
+    println(delta_time);
+  #endif
 }
 
 void mousePressed()
