@@ -39,7 +39,7 @@ void draw()
   println(world_scroll.getX());
   
   background(180);
-  rect(x_pos,gravity.getY(),50,50);
+  rect(world_scroll.getX(),gravity.getY(),50,50);
 }
 
 class Scroll
@@ -47,6 +47,9 @@ class Scroll
   int x;
   boolean scroll;
   int scroll_rate;
+  int time_delay;
+  int time_now;
+
   Scroll()
   {
     // initiate the world scroll
@@ -56,17 +59,34 @@ class Scroll
     scroll = false;
     
     // set the initial rate
-    scroll_rate = 1;
+    scroll_rate = 4;
     
+    // time delay
+    time_delay = 1; // i.e. 2/60 frames
+    
+    // time now 
+    time_now = 0;
+   
   }
   void startScroll()
   {
     scroll = true; 
   }
   void update()
-  {
-    // add to the x
-    x = x + scroll_rate; 
+  {    
+    if(time_now >= time_delay)
+    {
+      // reset the timer
+      time_now = 0;
+      
+      // check if we should scroll (should be done before the time_now >= time_delay)
+      if(scroll)
+      {
+        // add to the x
+        x = x + scroll_rate; 
+      }
+    }
+    time_now++;
   }
   int getX()
   {
