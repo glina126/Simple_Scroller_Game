@@ -1,6 +1,7 @@
 int x_pos,y_pos;
 boolean DEBUG;
 Gravity gravity;
+Scroll world_scroll;
 
 void setup()
 {
@@ -23,15 +24,54 @@ void setup()
   // initialize gravity
   gravity = new Gravity();
   
+  // initialize the world scroll
+  world_scroll = new Scroll();
+  
+  world_scroll.startScroll();
 }
 
 void draw()
 {
   gravity.calculatePhysics();
+  world_scroll.update();
+  
+  print("x = ");
+  println(world_scroll.getX());
   
   background(180);
   rect(x_pos,gravity.getY(),50,50);
-  
+}
+
+class Scroll
+{
+  int x;
+  boolean scroll;
+  int scroll_rate;
+  Scroll()
+  {
+    // initiate the world scroll
+    x = 0;
+    
+    // make sure we dont scroll when we start
+    scroll = false;
+    
+    // set the initial rate
+    scroll_rate = 1;
+    
+  }
+  void startScroll()
+  {
+    scroll = true; 
+  }
+  void update()
+  {
+    // add to the x
+    x = x + scroll_rate; 
+  }
+  int getX()
+  {
+    return x;
+  }
 }
 
 class Gravity
